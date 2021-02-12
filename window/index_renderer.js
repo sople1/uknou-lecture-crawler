@@ -6,11 +6,11 @@
 // process.
 
 $(function () {
-    show_login_info();
+    do_login_proc();
 })
 
-function show_login_info () {
-    let $elem = $('div.status-login')
+function do_login_proc () {
+    let $status = $('div.status-login')
 
     window.app.cookies().then((cookies) => {
         let status = true
@@ -33,10 +33,12 @@ function show_login_info () {
 
 
         if (status) {
-            $elem.empty().append(`<p>로그인 되었습니다. ID: ${cookie_dic['knouUknouID']}, 이름: ${decodeUnicode(cookie_dic['knouName'])}</p>`)
+            $status.empty().append(`<p>로그인 되었습니다. ID: ${cookie_dic['knouUknouID']}, 이름: ${decodeUnicode(cookie_dic['knouName'])}</p>`)
         } else {
-            $elem.empty().append(`<p>로그인이 필요합니다.</p>`)
+            $status.empty().append(`<p>로그인이 필요합니다.</p>`)
         }
+
+
     })
 }
 function decodeUnicode (unicodeString) {

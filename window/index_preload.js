@@ -18,5 +18,8 @@ contextBridge.exposeInMainWorld(
                 console.log('failed: get cookies', error)
             })
         },
+        openLogin: () => {
+            return remote.getGlobal('open_login')()
+        }
     }
 )

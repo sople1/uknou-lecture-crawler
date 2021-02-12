@@ -12,10 +12,14 @@ app.whenReady().then(() => {
   session_manager.cookie.load()
 
   let main = main_window.create()
-  let login = login_window.set_parent(main).create()
-  login.on('closed', () => {
-    session_manager.cookie.save()
-  })
+  global.open_login = () => {
+    let login = login_window.set_parent(main).create()
+    login.on('closed', () => {
+      session_manager.cookie.save()
+      main.webContents.executeJavaScript('do_login_proc()')
+    })
+  }
+  global.open_login()
 
   app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
