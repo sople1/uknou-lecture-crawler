@@ -1,34 +1,26 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
-const path = require('path')
-
-function createWindow () {
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
-    }
-  })
-
-  // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
-
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
-}
+const {app, session, BrowserWindow} = require('electron')
+const session_manager = require('./lib/session-manager')
+const main_window = require('./window/main')
+const login_window = require('./window/login')
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  createWindow()
-  
+  session_manager.set_session(session.defaultSession)
+  session_manager.cookie.load()
+
+  let main = main_window.create()
+  let login = login_window.set_parent(main).create()
+  login.on('closed', () => {
+    session_manager.cookie.save()
+  })
+
   app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    if (BrowserWindow.getAllWindows().length === 0) main_window.create()
   })
 })
 
