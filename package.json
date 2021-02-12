@@ -1,0 +1,23 @@
+{
+  "name": "uknou-lecture-crowler",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "knou",
+    "uknou",
+    "crawler"
+  ],
+  "author": "sople1@snooey.net",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^11.2.3",
+    "electron-prebuilt": "^1.4.13"
+  }
+}

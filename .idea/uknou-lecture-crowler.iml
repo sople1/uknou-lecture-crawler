@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/temp" />
+      <excludeFolder url="file://$MODULE_DIR$/.tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/tmp" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="@types/electron-clipboard-extended" level="application" />
+    <orderEntry type="library" name="@types/electron-devtools-installer" level="application" />
+    <orderEntry type="library" name="@types/electron-json-storage" level="application" />
+    <orderEntry type="library" name="@types/electron-load-devtool" level="application" />
+    <orderEntry type="library" name="@types/electron-notify" level="application" />
+    <orderEntry type="library" name="@types/electron-notifications" level="application" />
+    <orderEntry type="library" name="@types/electron-window-state" level="application" />
+    <orderEntry type="library" name="@types/electron-progressbar" level="application" />
+    <orderEntry type="library" name="@types/electron-spellchecker" level="application" />
+    <orderEntry type="library" name="@types/electron-localshortcut" level="application" />
+    <orderEntry type="library" name="@types/electron-prompt" level="application" />
+    <orderEntry type="library" name="@types/electron-settings" level="application" />
+  </component>
+</module>

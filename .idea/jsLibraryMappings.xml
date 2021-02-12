@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="PROJECT" libraries="{@types/electron-clipboard-extended, @types/electron-devtools-installer, @types/electron-json-storage, @types/electron-load-devtool, @types/electron-localshortcut, @types/electron-notifications, @types/electron-notify, @types/electron-progressbar, @types/electron-prompt, @types/electron-settings, @types/electron-spellchecker, @types/electron-window-state}" />
+    <includedPredefinedLibrary name="HTTP Response Handler" />
+    <includedPredefinedLibrary name="Node.js Core" />
+  </component>
+</project>
