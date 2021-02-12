@@ -1,7 +1,7 @@
 // Modules to control application life and create native browser window
 const {app, session, BrowserWindow} = require('electron')
 const session_manager = require('./lib/session-manager')
-const main_window = require('./window/main')
+const main_window = require('./window')
 const login_window = require('./window/login')
 
 // This method will be called when Electron has finished
