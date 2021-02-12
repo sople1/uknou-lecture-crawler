@@ -31,8 +31,4 @@ $(function () {
         'min-width': 'auto',
         'max-width': 'auto'
     });
-
-    fnSbjtViewPage = (sbjtId, cntsId) => {
-        window.app.openLecture(sbjtId, cntsId)
-    }
 })
