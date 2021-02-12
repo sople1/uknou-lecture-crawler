@@ -32,10 +32,11 @@ function create () {
     window.loadURL(url)
 
     window.once('ready-to-show', () => {
+        window.setTitle('로그인')
         window.show()
 
         // Open the DevTools.
-        window.webContents.openDevTools()
+        // window.webContents.openDevTools()
 
         window.focus()
     })
