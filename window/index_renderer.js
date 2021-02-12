@@ -53,7 +53,11 @@ function make_button (status) {
                 e.preventDefault()
                 window.app.openLogout()
             })
-            $elem.append($btn_logout)
+            let $btn_search = $('<button>강의찾기</button>').on('click', (e) => {
+                e.preventDefault()
+                window.app.openSearch()
+            })
+            $elem.append($btn_logout).append($btn_search)
             break;
         case false:
         default:

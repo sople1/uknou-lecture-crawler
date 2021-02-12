@@ -4,6 +4,7 @@ const session_manager = require('./lib/session-manager')
 const main_window = require('./window')
 const login_window = require('./window/login')
 const logout_window = require('./window/logout')
+const search_window = require('./window/search')
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -12,22 +13,28 @@ app.whenReady().then(() => {
   session_manager.set_session(session.defaultSession)
   session_manager.cookie.load()
 
-  let main = main_window.create()
+  let mainW = main_window.create()
 
   global.open_login = () => {
-    let login = login_window.set_parent(main).create()
-    login.on('closed', () => {
+    let w = login_window.set_parent(mainW).create()
+    w.on('closed', () => {
       session_manager.cookie.save()
-      main.webContents.executeJavaScript('do_login_proc()')
+      mainW.webContents.executeJavaScript('do_login_proc()')
     })
   }
   global.open_login()
 
   global.open_logout = () => {
-    let logout = logout_window.set_parent(main).create()
-    logout.on('closed', () => {
+    let w = logout_window.set_parent(mainW).create()
+    w.on('closed', () => {
       session_manager.cookie.save()
-      main.webContents.executeJavaScript('do_login_proc()')
+      mainW.webContents.executeJavaScript('do_login_proc()')
+    })
+  }
+
+  global.open_search = () => {
+    let w = search_window.set_parent(mainW).create()
+    w.on('closed', () => {
     })
   }
 
