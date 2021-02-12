@@ -20,6 +20,9 @@ contextBridge.exposeInMainWorld(
         },
         openLogin: () => {
             return remote.getGlobal('open_login')()
+        },
+        openLogout: () => {
+            return remote.getGlobal('open_logout')()
         }
     }
 )

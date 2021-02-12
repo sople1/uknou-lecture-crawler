@@ -10,8 +10,6 @@ $(function () {
 })
 
 function do_login_proc () {
-    let $status = $('div.status-login')
-
     window.app.cookies().then((cookies) => {
         let status = true
         let cookie_dic = {}
@@ -31,16 +29,43 @@ function do_login_proc () {
         if (Object.keys(cookie_dic).length != names.length)
             status = false
 
-
-        if (status) {
-            $status.empty().append(`<p>로그인 되었습니다. ID: ${cookie_dic['knouUknouID']}, 이름: ${decodeUnicode(cookie_dic['knouName'])}</p>`)
-        } else {
-            $status.empty().append(`<p>로그인이 필요합니다.</p>`)
-        }
-
-
+        set_status_msg(status, cookie_dic)
+        make_button(status)
     })
 }
+
+function set_status_msg (status, data) {
+    let $elem = $('div.status-login').empty()
+
+    if (status) {
+        $elem.append(`<p>로그인 되었습니다. ID: ${data['knouUknouID']}, 이름: ${decodeUnicode(data['knouName'])}</p>`)
+    } else {
+        $elem.append(`<p>로그인이 필요합니다.</p>`)
+    }
+}
+
+function make_button (status) {
+    let $elem = $('div.func-buttons').empty().css('display', 'block')
+
+    switch (status) {
+        case true:
+            let $btn_logout = $('<button>로그아웃</button>').on('click', (e) => {
+                e.preventDefault()
+                window.app.openLogout()
+            })
+            $elem.append($btn_logout)
+            break;
+        case false:
+        default:
+            let $btn_login = $('<button>로그인</button>').on('click', (e) => {
+                e.preventDefault()
+                window.app.openLogin()
+            })
+            $elem.append($btn_login)
+            break;
+    }
+}
+
 function decodeUnicode (unicodeString) {
     let r = /\\u([\d\w]{4})/gi;
     unicodeString = unicodeString.replace(
