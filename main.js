@@ -4,6 +4,7 @@ const fs = require('fs');
 const https = require('https');
 const path = require('path');
 const session_manager = require('./lib/session-manager')
+const media_downloader = require('./lib/media-downloader')
 const main_window = require('./window')
 const login_window = require('./window/login')
 const logout_window = require('./window/logout')
@@ -19,6 +20,11 @@ app.whenReady().then(() => {
   session_manager.cookie.load()
 
   let mainW = main_window.create()
+
+  media_downloader.set_screen((msg) => {
+    mainW.webContents.executeJavaScript(`show_download_stat("${msg.replace(/\n/g, "\\n")}")`)
+  })
+  media_downloader.run()
 
   global.open_login = () => {
     let w = login_window.set_parent(mainW).create()
@@ -55,20 +61,13 @@ app.whenReady().then(() => {
     })
   }
 
-  global.save_video = (path_local, url) => {
+  global.save_media = (path_local, url) => {
     setTimeout(() => {
       fs.mkdirSync(path.dirname(path_local), { recursive: true })
-
-      let video_file = fs.createWriteStream(path_local)
-      let request = https.get(url, (response) => {
-        response.pipe(video_file)
-      }).on('error', () => {
-        setTimeout(() => {
-          global.save_video(path_local, url)
-        }, 30000)
-      })
+      media_downloader.add(path_local, url)
     }, 0)
   }
+
 
   app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the

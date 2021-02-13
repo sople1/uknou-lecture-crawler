@@ -7,6 +7,7 @@
 
 $(function () {
     replace_video_player();
+    replace_audio_player();
 
     $('div.header-title button').remove();
     $('a.gotoTop').parent().remove();
@@ -34,6 +35,25 @@ function replace_video_player() {
     }
 }
 
+function replace_audio_player() {
+    let selector = 'iframe[id^=ifrmAODPlayer]';
+    let $iframe = $(selector);
+    if ($iframe.length > 0) {
+        setTimeout(() => {
+            // iframe to audio tag
+            $iframe.each((index, elem) => {
+                let $audio = $(elem).contents().find('audio');
+                if ($audio.length > 0)
+                    $(elem).replaceWith($('<audio></audio>').attr('src', $audio.attr('src')).attr('controls', true));
+            });
+
+            if ($(selector).length > 0) {
+                replace_audio_player();
+            }
+        }, 1000)
+    }
+}
+
 function show_save_button () {
     let $container = $('<div></div>').addClass('save-button-container').css({
         'position': 'fixed',
@@ -54,7 +74,7 @@ function show_save_button () {
 
 function do_save(is_close) {
     let waiter = setInterval(() => {
-        if ($('iframe[id^=ifrmVODPlayer]').length < 1) {
+        if ($('iframe[id^=ifrmVODPlayer]').length < 1 && $('iframe[id^=ifrmAODPlayer]').length < 1) {
             clearInterval(waiter);
             window.app.save($('h4.header-subject').text().trim(), $('h2.header-weekly').text().trim())
                 .then(() => {

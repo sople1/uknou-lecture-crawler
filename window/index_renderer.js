@@ -70,6 +70,14 @@ function make_button (status) {
     }
 }
 
+function show_download_stat (msg) {
+    let $elem = $('div.status-download').empty().append(
+        '<pre>' +
+        msg +
+        '</pre>'
+    )
+}
+
 function decodeUnicode (unicodeString) {
     let r = /\\u([\d\w]{4})/gi;
     unicodeString = unicodeString.replace(
