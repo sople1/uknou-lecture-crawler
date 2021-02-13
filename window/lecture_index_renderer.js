@@ -42,11 +42,11 @@ $(function () {
     }
 
     fnCntsPopupForDown = (sbjtId, lectPldcTocNo, atlcNo) => {
-        window.app.openView(null, sbjtId, lectPldcTocNo, atlcNo)
+        window.app.openViewForDownload(null, sbjtId, lectPldcTocNo, atlcNo)
     }
 
     fnCntsTmpPopupForDown = (sbjtId, lectPldcTocNo, tmpCode) => {
-        window.app.openView('tmp', sbjtId, lectPldcTocNo, tmpCode)
+        window.app.openViewForDownload('tmp', sbjtId, lectPldcTocNo, tmpCode)
     }
 
     show_save_button();

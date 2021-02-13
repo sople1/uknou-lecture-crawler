@@ -46,8 +46,8 @@ app.whenReady().then(() => {
     })
   }
 
-  global.open_lecture_view = (type, sbjtId, lectPldcTocNo, code) => {
-    let w = lecture_view_window.set_key(type, sbjtId, lectPldcTocNo, code).create()
+  global.open_lecture_view = (type, sbjtId, lectPldcTocNo, code, is_download) => {
+    let w = lecture_view_window.set_key(type, sbjtId, lectPldcTocNo, code, is_download).create()
     w.on('closed', () => {
     })
   }
