@@ -1,5 +1,8 @@
 // Modules to control application life and create native browser window
 const {app, session, BrowserWindow} = require('electron')
+const fs = require('fs');
+const https = require('https');
+const path = require('path');
 const session_manager = require('./lib/session-manager')
 const main_window = require('./window')
 const login_window = require('./window/login')
@@ -50,6 +53,21 @@ app.whenReady().then(() => {
     let w = lecture_view_window.set_key(type, sbjtId, lectPldcTocNo, code).create(is_download)
     w.on('closed', () => {
     })
+  }
+
+  global.save_video = (path_local, url) => {
+    setTimeout(() => {
+      fs.mkdirSync(path.dirname(path_local), { recursive: true })
+
+      let video_file = fs.createWriteStream(path_local)
+      let request = https.get(url, (response) => {
+        response.pipe(video_file)
+      }).on('error', () => {
+        setTimeout(() => {
+          global.save_video(path_local, url)
+        }, 30000)
+      })
+    }, 0)
   }
 
   app.on('activate', () => {
