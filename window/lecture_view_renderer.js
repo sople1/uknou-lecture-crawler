@@ -6,17 +6,7 @@
 // process.
 
 $(function () {
-    setTimeout(() => {
-        // iframe to video tag
-        $('iframe').each((index, elem) => {
-            try {
-                let video_src = $(elem).contents().find('video').attr('src');
-                $(elem).replaceWith($('<video></video>').attr('src', video_src).attr('controls', true));
-            } catch (e) {
-                console.log(e);
-            }
-        });
-    }, 1000)
+    replace_video_player();
 
     $('div.header-title button').remove();
     $('a.gotoTop').parent().remove();
@@ -25,6 +15,24 @@ $(function () {
 
 })
 
+function replace_video_player() {
+    let selector = 'iframe[id^=ifrmVODPlayer]';
+    let $iframe = $(selector);
+    if ($iframe.length > 0) {
+        setTimeout(() => {
+            // iframe to video tag
+            $iframe.each((index, elem) => {
+                let $video = $(elem).contents().find('video');
+                if ($video.length > 0)
+                    $(elem).replaceWith($('<video></video>').attr('src', $video.attr('src')).attr('controls', true));
+            });
+
+            if ($(selector).length > 0) {
+                replace_video_player();
+            }
+        }, 1000)
+    }
+}
 
 function show_save_button () {
     let $container = $('<div></div>').addClass('save-button-container').css({
