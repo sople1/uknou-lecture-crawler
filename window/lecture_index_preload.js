@@ -20,12 +20,11 @@ contextBridge.exposeInMainWorld(
             const window = remote.getCurrentWindow();
 
             // Specifying the assets folder as the default path
-            const filepathlocal = path.join(__dirname,
-                ['../savedata', dir.replaceAll('/', '_'), file.replaceAll('/', '_')].join('/')
-                + '.html');
+            const dir_path_local = path.join(__dirname, '../savedata', dir.replaceAll('/', '_'));
+            const file_path_local = path.join(dir_path_local, file.replaceAll('/', '_') + '.html');
 
             // Works for the Local Page
-            return window.webContents.savePage(filepathlocal, 'HTMLComplete').then(() => {
+            return window.webContents.savePage(file_path_local, 'HTMLComplete').then(() => {
                 console.log('Page was saved successfully.')
             }).catch(err => {
                 console.log(err);

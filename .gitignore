@@ -221,3 +221,6 @@ fabric.properties
 
 # userdata
 userdata
+
+# savedata
+savedata

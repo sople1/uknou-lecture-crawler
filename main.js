@@ -47,7 +47,7 @@ app.whenReady().then(() => {
   }
 
   global.open_lecture_view = (type, sbjtId, lectPldcTocNo, code, is_download) => {
-    let w = lecture_view_window.set_key(type, sbjtId, lectPldcTocNo, code, is_download).create()
+    let w = lecture_view_window.set_key(type, sbjtId, lectPldcTocNo, code).create(is_download)
     w.on('closed', () => {
     })
   }
