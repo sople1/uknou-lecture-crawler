@@ -6,6 +6,7 @@ const login_window = require('./window/login')
 const logout_window = require('./window/logout')
 const search_window = require('./window/search')
 const lecture_index_window = require('./window/lecture_index')
+const lecture_view_window = require('./window/lecture_view')
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -41,6 +42,12 @@ app.whenReady().then(() => {
 
   global.open_lecture_index = (sbjtId, cntsId) => {
     let w = lecture_index_window.set_key(sbjtId, cntsId).create()
+    w.on('closed', () => {
+    })
+  }
+
+  global.open_lecture_view = (type, sbjtId, lectPldcTocNo, code) => {
+    let w = lecture_view_window.set_key(type, sbjtId, lectPldcTocNo, code).create()
     w.on('closed', () => {
     })
   }
