@@ -91,12 +91,13 @@ function download_file (idx, path, rurl) {
         }).on('end', () => {
             download.end_status(idx)
         })
-    }).on('error', () => {
-        download.end_status(idx)
+    }).on('error', (error) => {
+        console.log(error)
         download.queue.push({
             'path': path,
             'rurl': rurl
         })
+        download.end_status(idx)
     })
 
     file.on('end', () => {
@@ -120,8 +121,9 @@ function run_download_queue() {
                 if (download.queue.length > 0) {
                     let data = download.queue.shift()
                     download_file(i, data.path, data.rurl)
+                } else {
+                    null_count = null_count + 1
                 }
-                null_count = null_count + 1
                 continue
             }
 
