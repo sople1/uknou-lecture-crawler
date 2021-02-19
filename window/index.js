@@ -24,7 +24,7 @@ function create () {
         window.show()
 
         // Open the DevTools.
-        window.webContents.openDevTools()
+        // window.webContents.openDevTools()
     })
 
 
