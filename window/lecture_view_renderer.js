@@ -8,6 +8,7 @@
 $(function () {
     replace_video_player();
     replace_audio_player();
+    replace_exam();
 
     $('div.header-title button').remove();
     $('a.gotoTop').parent().remove();
@@ -51,6 +52,20 @@ function replace_audio_player() {
                 replace_audio_player();
             }
         }, 1000)
+    }
+}
+
+function replace_exam() {
+    let selector = 'div.exam-content-box';
+    let $area = $(selector);
+    if ($area.length > 0) {
+        $('div.exam-list-number', $area).remove();
+        $area.find('div.exam-body-hidden').removeClass('exam-body-hidden').addClass('exam-body');
+        $('div.exam-body', $area).each((idx, elem) => {
+            $(elem).closest('form').replaceWith($(elem));
+            $(elem).find('.exam-btn-group').remove();
+            $(elem).find('.exam-desc-btn-group').remove();
+        });
     }
 }
 
