@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, session, BrowserWindow} = require('electron')
+const {app, session, dialog, BrowserWindow} = require('electron')
 const fs = require('fs');
 const path = require('path');
 const session_manager = require('./lib/session-manager')
@@ -24,9 +24,16 @@ app.whenReady().then(() => {
   session_manager.cookie.load()
 
   let mainW = main_window.create()
-  mainW.on('close', () => {
-    if (media_downloader.check_running()) {
-      return false;
+  mainW.on('close', (e) => {
+    let choice = dialog.showMessageBoxSync(mainW,
+        {
+          type: 'question',
+          buttons: ['닫기', '취소'],
+          title: '경고',
+          message: '다운로드중인 파일이 있으면 이 창을 닫지 마십시오. 창을 닫으시겠습니까?'
+        })
+    if (choice === 1) {
+        e.preventDefault()
     }
   })
 
@@ -40,6 +47,7 @@ app.whenReady().then(() => {
     w.on('closed', () => {
       session_manager.cookie.save()
       mainW.webContents.executeJavaScript('do_login_proc()')
+      mainW.focus()
     })
   }
   global.open_login()
