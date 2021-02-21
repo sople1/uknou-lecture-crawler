@@ -29,9 +29,18 @@ function do_login_proc () {
         if (Object.keys(cookie_dic).length != names.length)
             status = false
 
+        set_app_path()
         set_status_msg(status, cookie_dic)
         make_button(status)
     })
+}
+
+function set_app_path() {
+    let $elem = $('div.status-app-path').empty()
+    let app_path = window.app.appPath()
+
+    $elem.append(`<p>앱 경로: ${app_path}</p>`)
+
 }
 
 function set_status_msg (status, data) {

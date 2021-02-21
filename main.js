@@ -1,7 +1,6 @@
 // Modules to control application life and create native browser window
 const {app, session, BrowserWindow} = require('electron')
 const fs = require('fs');
-const https = require('https');
 const path = require('path');
 const session_manager = require('./lib/session-manager')
 const media_downloader = require('./lib/media-downloader')
@@ -12,11 +11,16 @@ const search_window = require('./window/search')
 const lecture_index_window = require('./window/lecture_index')
 const lecture_view_window = require('./window/lecture_view')
 
+global.app_path = app.getAppPath()
+while ((/(\.asar|resources)$/gm).exec(global.app_path)) {
+  global.app_path = path.join(global.app_path.toString(), '..')
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  session_manager.set_session(session.defaultSession)
+  session_manager.init().set_session(session.defaultSession)
   session_manager.cookie.load()
 
   let mainW = main_window.create()

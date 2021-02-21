@@ -6,7 +6,39 @@
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "electron-packager . crawler"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "net.snooey.uknou_lecture_crawler",
+    "productName": "UKNOU Lecture Crawler",
+    "copyright": "Seongsu Yoon <sople1@snooey.net>",
+    "files": [
+      "**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{appveyor.yml,.travis.yml,circle.yml}",
+      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}",
+      "!.github",
+      "!savedata",
+      "!userdata"
+    ],
+    "directories": {
+      "buildResources": ""
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "language": 1042,
+      "perMachine": true
+    }
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -20,7 +52,7 @@
   "devDependencies": {
     "asar": "^3.0.3",
     "electron": "^11.2.3",
-    "electron-packager": "^15.2.0",
+    "electron-builder": "^22.9.1",
     "electron-prebuilt": "^1.4.13"
   }
 }

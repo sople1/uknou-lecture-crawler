@@ -15,7 +15,7 @@ contextBridge.exposeInMainWorld(
             const window = remote.getCurrentWindow();
 
             // Specifying the assets folder as the default path
-            const dir_path_local = path.join(__dirname, '../savedata', dir.replaceAll('/', '_'), "강의");
+            const dir_path_local = path.join(remote.getGlobal('app_path'), 'savedata', dir.replaceAll('/', '_'), "강의");
             const file_path_local = path.join(dir_path_local, file.replaceAll('/', '_').replaceAll(':', '-').replaceAll('?', '？')+ '.html');
             const video_dir_path = path.join(dir_path_local, 'videos');
             const audio_dir_path = path.join(dir_path_local, 'audios');
