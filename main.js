@@ -24,6 +24,11 @@ app.whenReady().then(() => {
   session_manager.cookie.load()
 
   let mainW = main_window.create()
+  mainW.on('close', () => {
+    if (media_downloader.check_running()) {
+      return false;
+    }
+  })
 
   media_downloader.set_screen((msg) => {
     mainW.webContents.executeJavaScript(`show_download_stat("${msg.replace(/\n/g, "\\n")}")`)
