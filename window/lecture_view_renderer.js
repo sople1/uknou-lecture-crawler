@@ -61,10 +61,13 @@ function replace_exam() {
     if ($area.length > 0) {
         $('div.exam-list-number', $area).remove();
         $area.find('div.exam-body-hidden').removeClass('exam-body-hidden').addClass('exam-body');
-        $('div.exam-body', $area).each((idx, elem) => {
-            $(elem).closest('form').replaceWith($(elem));
-            $(elem).find('.exam-btn-group').remove();
-            $(elem).find('.exam-desc-btn-group').remove();
+        $('form', $area).each((idx, elem) => {
+            $(elem).find('div.hidden').removeClass('hidden').addClass('exam-body');
+            let $exam = $(elem).find('div.exam-body');
+            $exam.appendTo($(elem).parent());
+            $exam.find('.exam-btn-group').remove();
+            $exam.find('.exam-desc-btn-group').remove();
+            $(elem).remove();
         });
     }
 }
@@ -75,7 +78,7 @@ function show_save_button () {
         'top': '10px',
         'right': '10px',
         'z-index': '999999'
-    }).appendTo($('header'));
+    }).appendTo($('.content-block-header'));
 
     let $save = $('<button>저장</button>').css({
         'font-size': '24px'
@@ -91,7 +94,8 @@ function do_save(is_close) {
     let waiter = setInterval(() => {
         if ($('iframe[id^=ifrmVODPlayer]').length < 1 && $('iframe[id^=ifrmAODPlayer]').length < 1) {
             clearInterval(waiter);
-            window.app.save($('h4.header-subject').text().trim(), $('h2.header-weekly').text().trim())
+            window.app.save($('.content-block-header .header-title.font-14.clearfix .pull-left').text().trim(),
+                $('.content-block-header .header-title.font-18.clearfix a').text().trim())
                 .then(() => {
                     let $buttons = show_save_button();
                     let $msg = $('<span>다운로드 완료</span>').prependTo($buttons);

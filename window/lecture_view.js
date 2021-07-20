@@ -7,8 +7,8 @@ let sbjtId = null
 let lectPldcTocNo = null
 let code = null
 let urls = [
-    'https://ucampus.knou.ac.kr/ekp/user/study/retrieveUSTStudy.do',
-    'https://ucampus.knou.ac.kr/ekp/user/study/retrieveUSTStudyTmp.do'
+    'https://ucampus.knou.ac.kr/ekp/app/study/retrieveUSTStudy.do',
+    'https://ucampus.knou.ac.kr/ekp/app/study/retrieveUSTStudyTmp.do'
 ]
 let url = urls[0]
 let code_types = ['pAtlcNo', 'pTmpCode']
