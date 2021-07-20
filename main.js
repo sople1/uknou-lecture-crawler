@@ -1,7 +1,7 @@
 // Modules to control application life and create native browser window
 const {app, session, dialog, BrowserWindow} = require('electron')
-const fs = require('fs');
-const path = require('path');
+const fs = require('fs')
+const path = require('path')
 const session_manager = require('./lib/session-manager')
 const media_downloader = require('./lib/media-downloader')
 const main_window = require('./window')

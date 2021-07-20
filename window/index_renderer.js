@@ -5,7 +5,7 @@
 // selectively enable features needed in the rendering
 // process.
 
-$(function () {
+$(() => {
     do_login_proc();
 })
 
@@ -66,7 +66,13 @@ function make_button (status) {
                 e.preventDefault()
                 window.app.openSearch()
             })
-            $elem.append($btn_logout).append($btn_search)
+            let $btn_lecture_by_code = $('<button>강의코드입력</button>').on('click', (e) => {
+                e.preventDefault()
+                window.app.dialogs().prompt('강의코드입력', code => {
+                    window.app.openLectureByCode(code)
+                })
+            })
+            $elem.append($btn_logout).append($btn_search).append($btn_lecture_by_code)
             break;
         case false:
         default:

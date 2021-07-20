@@ -54,5 +54,8 @@
     "electron": "^11.2.3",
     "electron-builder": "^22.9.1",
     "electron-prebuilt": "^1.4.13"
+  },
+  "dependencies": {
+    "dialogs": "^2.0.1"
   }
 }
