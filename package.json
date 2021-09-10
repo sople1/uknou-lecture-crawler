@@ -50,7 +50,7 @@
   "author": "sople1@snooey.net",
   "license": "MIT",
   "devDependencies": {
-    "asar": "^3.0.3",
+    "asar": "^3.1.0",
     "electron": "^11.2.3",
     "electron-builder": "^22.9.1",
     "electron-prebuilt": "^1.4.13"
