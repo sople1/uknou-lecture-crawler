@@ -52,7 +52,7 @@
   "devDependencies": {
     "asar": "^3.0.3",
     "electron": "^11.2.3",
-    "electron-builder": "^22.9.1",
+    "electron-builder": "^23.1.0",
     "electron-prebuilt": "^1.4.13"
   },
   "dependencies": {
