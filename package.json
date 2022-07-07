@@ -51,7 +51,7 @@
   "license": "MIT",
   "devDependencies": {
     "asar": "^3.0.3",
-    "electron": "^11.2.3",
+    "electron": "^19.0.8",
     "electron-builder": "^22.9.1",
     "electron-prebuilt": "^1.4.13"
   },
